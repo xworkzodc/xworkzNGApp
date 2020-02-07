@@ -1,0 +1,159 @@
+<div class="container-fluid">
+
+    <div class="row justify-content-center">
+        <h4>{{courseText}}</h4>
+    </div>
+    <ngx-datatable
+        #table
+        class="material"
+        [columnMode]="'force'"
+        [headerHeight]="50"
+        [footerHeight]="50"
+        [rowHeight]="'auto'"
+        [limit]="10"
+        [rows]="rows">
+
+
+
+        <ngx-datatable-column name="Batch Name" prop="batchName">
+            <ng-template
+                ngx-datatable-cell-template="ngx-datatable-cell-template"
+                let-rowIndex="rowIndex"
+                let-value="value"
+                let-row="row">
+                {{value}}
+            </ng-template>
+        </ngx-datatable-column>
+
+        <ngx-datatable-column name="Course" prop="courseName">
+            <ng-template  ngx-datatable-cell-template="ngx-datatable-cell-template" let-rowIndex="rowIndex"  let-value="value" let-row="row">
+
+                {{value}}
+            
+            </ng-template>
+        </ngx-datatable-column>
+
+        <ngx-datatable-column name="Batch Time" prop="batchTime">
+            <ng-template  ngx-datatable-cell-template="ngx-datatable-cell-template" let-rowIndex="rowIndex" let-value="value" let-row="row">
+                {{value}}
+            </ng-template>
+        </ngx-datatable-column>
+
+        <ngx-datatable-column name="Batch Type" prop="batchType">
+            <ng-template  ngx-datatable-cell-template="ngx-datatable-cell-template" let-rowIndex="rowIndex"  let-value="value" let-row="row">
+
+                {{value}}
+            
+            </ng-template>
+        </ngx-datatable-column>
+
+        <ngx-datatable-column name="Fees" prop="fees">
+            <ng-template  ngx-datatable-cell-template="ngx-datatable-cell-template" let-rowIndex="rowIndex"  let-value="value" let-row="row">
+
+                {{value}}
+            
+            </ng-template>
+        </ngx-datatable-column>
+
+        <ngx-datatable-column name="status" prop="isActive" [width]="80">
+            <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
+                <button type="button" class="btn btn-info" (click)="changeBatchStatus(row)" *ngIf='row.isActive'>Actived</button>
+                <button type="button" class="btn btn-danger" (click)="changeBatchStatus(row)" *ngIf='!row.isActive'>Deactived</button>
+            </ng-template>
+        </ngx-datatable-column>
+
+        <ngx-datatable-column name="action"  [width]="80">
+            <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
+                <button type="button" class="btn btn-dark" (click)="editBatchData(row)" data-toggle="modal" data-target="#editBatchData">Edit</button>
+            </ng-template>
+        </ngx-datatable-column>
+
+
+        <!-- <ngx-datatable-column name="Action" >
+            <ng-template  ngx-datatable-cell-template="ngx-datatable-cell-template" let-rowIndex="rowIndex"  let-value="value" let-row="row">
+
+                {{value}}
+                <button type="button"  class="btn btn-success disable" (click)="editDetails(row)" >Edit</button>
+            </ng-template>
+        </ngx-datatable-column> -->
+
+
+    </ngx-datatable>
+
+</div>
+
+<div class="modal" id="editBatchData">
+    <div class="modal-dialog modal-md">
+      <div class="modal-content">
+  
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h4 class="modal-title">Update Batch</h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+  
+        <!-- Modal body -->
+        <div class="modal-body">
+            <div class="row justify-content-center">
+                <h4>{{courseText}}</h4>
+            </div>
+            <form class="justify-content-center" [formGroup]="batchData" (submit)="updateBatchData()"> 
+                <!-- <div class="row"> -->
+                    <div class="form-group">
+                        <label for="batchName">
+                            Batch Name:
+                        </label>
+                        <input name="batchId" type="hidden" formControlName="batchId"> 
+                        <input id="batchName" formControlName="batchName" type="text" placeholder="enter batch name" class="form-control col-sm-12">
+                    </div>
+    
+                    <div class="form-group">
+                        <label for="batchType">
+                            Select Batch Type:
+                        </label>
+                        <select class="form-control" formControlName="batchType" placeholder="enter batch type" id="batchType">
+                            <option value="">Select Batch Type</option>
+                            <option value="Weekdays">Weekdays</option>
+                            <option value="Weekends">Weekends</option>
+                        </select>
+                    </div>
+    
+                    <div class="form-group">
+                        <label for="batchTime">
+                            Batch Time:
+                        </label>
+                        <input formControlName="batchTime" id="batchTime"  class="form-control" placeholder="enter batch time">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="courseName">Select Course Name:</label>
+                        <ngx-select-dropdown 
+                        (change)="selectionChanged($event)" 
+                        [config]="config" 
+                        [options]="dropdownOptions"
+                        formControlName="courseName"
+                        ></ngx-select-dropdown>
+                    </div>
+    
+                    <!-- <div class="form-control">
+                        <label for=""></label>
+                    </div> -->
+                    
+                    <div class="form-group mb-3">
+                            <div class=" row justify-content-center pl-0 mb-4">
+                                <button type="submit" class="col-lg-8 btn btn-success justify-content-center" >Update</button>
+                            </div>
+                            
+                    </div>
+                <!-- </div> -->
+            </form>
+        </div>
+  
+        <!-- Modal footer -->
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" id="updateCourseModal" data-dismiss="modal">Close</button>
+        </div>
+  
+      </div>
+    </div>
+  </div>

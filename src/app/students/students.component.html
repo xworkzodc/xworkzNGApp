@@ -1,0 +1,74 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-6 mb-3 row">
+            <div class="col-sm-3 font-weight-bold" >Select Batch:</div> 
+            <div class="col-sm-6">
+                <ngx-select-dropdown 
+                    (change)="selectionChanged($event)" 
+                    [config]="config" 
+                    [options]="dropdownOptions"></ngx-select-dropdown>
+            </div>
+            
+    </div>
+    </div>
+    <ngx-datatable
+        #table
+        class="material"
+        [columnMode]="'force'"
+        [headerHeight]="50"
+        [loadingIndicator]="isLoading"
+        [footerHeight]="50"
+        [rowHeight]="'auto'"
+        
+        [limit]="10"
+        [rows]="rows"
+        [reorderable]="reorderable">
+
+       
+
+        <ngx-datatable-column name="Firstname" prop="employeeFn" [width]="150">
+            <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
+                {{value}}
+            </ng-template>
+        </ngx-datatable-column>
+
+        <ngx-datatable-column name="Lastname" prop="employeeLn" [width]="120">
+            <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
+                {{value}}
+            </ng-template>
+        </ngx-datatable-column>
+
+        <ngx-datatable-column name="contact no" prop="contactNo" [width]="80">
+            <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
+                {{value}}
+            </ng-template>
+        </ngx-datatable-column>
+
+        <ngx-datatable-column name="Alternat No" prop="alternatContactNo" [width]="80">
+            <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
+                {{value}}
+            </ng-template>
+        </ngx-datatable-column>
+
+        <ngx-datatable-column name="Email" prop="email">
+            <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row"  >
+                {{value}}
+            </ng-template>
+        </ngx-datatable-column>
+        
+        <ngx-datatable-column name="status" prop="isActive" [width]="80">
+            <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
+                <button type="button" class="btn btn-info" (click)="changeStatus(row)" *ngIf='row.isActive'>Actived</button>
+                <button type="button" class="btn btn-danger" (click)="changeStatus(row)" *ngIf='!row.isActive'>Deactived</button>
+            </ng-template>
+        </ngx-datatable-column>
+
+        <ngx-datatable-column name="Action" [width]="80">
+            <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
+                <!-- <button mat-flat-button (click)="getPlayer(row.pid)" color="primary">View Details</button> -->
+                <!-- <button mat-raised-button (click)="getPlayerPop(row.trainerId)" color="primary">View Details</button> -->
+                <button type="button" class="btn btn-info" (click)="getStudentById(row.employeeId)">View Details</button>
+            </ng-template>
+        </ngx-datatable-column>
+    </ngx-datatable>
+    </div>

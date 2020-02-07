@@ -1,0 +1,133 @@
+<div class="container">
+
+
+    <h3 class="row justify-content-center mb-3" >Student Name: {{studentName}}</h3>
+
+    <h5 class="row justify-content-center mt-3 mb-1">{{updateFeesData}}</h5>
+    <ngx-datatable
+        #table
+        class="material"
+        
+        [columnMode]="'force'"
+        [headerHeight]="50"
+        [footerHeight]="50"
+        [rowHeight]="'auto'"
+        [limit]="10"
+        [rows]="rows">
+
+
+
+        <ngx-datatable-column name="Batch Name" prop="batchName">
+            <ng-template
+                ngx-datatable-cell-template="ngx-datatable-cell-template"
+                let-rowIndex="rowIndex"
+                let-value="value"
+                let-row="row">
+                {{value}}
+            </ng-template>
+        </ngx-datatable-column>
+
+        <ngx-datatable-column name="Course" prop="courseName">
+            <ng-template  ngx-datatable-cell-template="ngx-datatable-cell-template" let-rowIndex="rowIndex"  let-value="value" let-row="row">
+
+                {{value}}
+            
+            </ng-template>
+        </ngx-datatable-column>
+
+        <ngx-datatable-column name="Batch Time" prop="batchTime">
+            <ng-template  ngx-datatable-cell-template="ngx-datatable-cell-template" let-rowIndex="rowIndex" let-value="value" let-row="row">
+                {{value}}
+            </ng-template>
+        </ngx-datatable-column>
+
+        <ngx-datatable-column name="Batch Type" prop="batchType">
+            <ng-template  ngx-datatable-cell-template="ngx-datatable-cell-template" let-rowIndex="rowIndex"  let-value="value" let-row="row">
+
+                {{value}}
+            
+            </ng-template>
+        </ngx-datatable-column>
+
+        <ngx-datatable-column name="Fees" prop="fees">
+            <ng-template  ngx-datatable-cell-template="ngx-datatable-cell-template" let-rowIndex="rowIndex"  let-value="value" let-row="row">
+
+                {{value}}
+            
+            </ng-template>
+        </ngx-datatable-column>
+
+        <ngx-datatable-column name="Paid" prop="totalPaid">
+            <ng-template  ngx-datatable-cell-template="ngx-datatable-cell-template" let-rowIndex="rowIndex"  let-value="value" let-row="row">
+
+                {{value}}
+            
+            </ng-template>
+        </ngx-datatable-column>
+
+
+        <ngx-datatable-column name="Pending" prop="pending">
+            <ng-template  ngx-datatable-cell-template="ngx-datatable-cell-template" let-rowIndex="rowIndex"  let-value="value" let-row="row">
+
+                {{value}}
+            
+            </ng-template>
+        </ngx-datatable-column>
+
+        <ngx-datatable-column name="fees Status" prop="feesStatus">
+            <ng-template  ngx-datatable-cell-template="ngx-datatable-cell-template" let-rowIndex="rowIndex"  let-value="value" let-row="row">
+
+                <!-- {{value}} -->
+                <button type="button"  class="btn btn-info disable" *ngIf="row.pending==0" >Fees Paid</button>
+                <button type="button"  class="btn btn-info" *ngIf="row.pending>0" data-toggle="modal" data-target="#feesData" (click)="updateFees(row)">update</button>
+            </ng-template>
+        </ngx-datatable-column>
+
+        <!-- <ngx-datatable-column name="Action">
+            <ng-template  ngx-datatable-cell-template="ngx-datatable-cell-template" let-rowIndex="rowIndex" let-value="value" let-row="row">
+                
+                <button type="button"  class="btn btn-info"   (click)="getStudentById(row.employeeId)">View Details</button>
+            
+            </ng-template>
+        </ngx-datatable-column> -->
+
+    </ngx-datatable>
+</div>
+
+<div class="modal" id="feesData">
+    <div class="modal-dialog modal-md">
+      <div class="modal-content">
+  
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h4 class="modal-title">Pay Fees For {{studentName}}</h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+  
+        <!-- Modal body -->
+        <div class="modal-body">
+            <div class="row justify-content-center">
+                <h5>{{updateFeesData}}</h5>
+            </div>
+            <input name='stId' type="hidden" class="form-control col-sm-1 d-none" [(ngModel)]="stId" >
+            <input name='courseId' type="hidden" class="form-control col-sm-1 d-none" [(ngModel)]="courseId" >
+            <input name='pending' type="hidden" class="form-control col-sm-1 d-none" [(ngModel)]="pending" >
+            <div class="form-group">
+                <label for="trName">Paying:</label>
+                <input class="form-control" id='fee' type="number" name="fee" [(ngModel)]='fee' >
+            </div>
+            <div class="col-lg-12 justify-content-center">
+                <div class="form-group">
+                    <button class="btn col-lg-12 btn-success" (click)='addFee()'>Update</button>
+                </div>                        
+            </div>
+        </div>
+  
+        <!-- Modal footer -->
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" id="closeTrainerUpdateModal" data-dismiss="modal">Close</button>
+        </div>
+  
+      </div>
+    </div>
+  </div>

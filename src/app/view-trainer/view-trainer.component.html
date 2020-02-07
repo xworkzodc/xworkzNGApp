@@ -1,0 +1,210 @@
+<div class="container-fluid" *ngIf="isTrainterData && !isBatchDt">
+   
+    <div>
+        <div class="row justify-content-center">
+            <h1>View Trainer's Details</h1>
+        </div>
+        <div class="row justify-content-center">
+            <h2>{{updateData}}</h2>
+        </div>
+    <ngx-datatable
+        #table
+        class="material"
+        [columns]="columns"
+        [columnMode]="'force'"
+        [headerHeight]="50"
+        [footerHeight]="50"
+        [rowHeight]="'auto'"
+        [limit]="10"
+        [rows]="rows">
+        <ngx-datatable-column name="No" prop="trainerId">
+            <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
+                {{value}}
+            </ng-template>
+        </ngx-datatable-column>
+
+        <ngx-datatable-column name="Email">
+            <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
+                {{value}}
+            </ng-template>
+        </ngx-datatable-column>
+
+        <ngx-datatable-column name="Total Batch" prop="ttlCls">
+            <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
+                {{value}}
+            </ng-template>
+        </ngx-datatable-column>
+
+        <ngx-datatable-column name="Action">
+            <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
+                <button type="button" class="btn btn-info mr-2 ml-2" (click)="getBatchesByTrainerId(row.trainerId)">View Batches</button>
+                <button type="button" class="btn btn-secondary mr-2 ml-2" (click)="editTrainerDetails(row)"  data-toggle="modal" data-target="#editTrainerDetails" >Edit Details</button>
+            </ng-template>
+        </ngx-datatable-column>
+    </ngx-datatable>
+</div>
+    </div>
+
+    <div class="container" *ngIf="!isTrainterData && !isBatchDt">
+        <div class="row justify-content-center">
+            <h2>Batch Details</h2>
+        </div>
+        <div class="row">
+            <div class="col-sm-9">
+                <input #empId type="hidden" id="empId" name="empId" >
+            </div>
+            <div class="col-sm-3">
+                <button class="btn btn-secondary mb-4 float-right" data-toggle="modal" data-target="#addBatchStuModal" (click)="addBatch()">Add Batch </button>
+            </div>
+        </div>
+        <ngx-datatable
+            #table1
+            class="material"
+            [columns]="columns"
+            [columnMode]="'force'"
+            [headerHeight]="50"
+            [footerHeight]="50"
+            [rowHeight]="'auto'"
+            [limit]="10"
+            [rows]="rows">
+            <ngx-datatable-column name="No" prop="batchId">
+                <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
+                    {{value}}
+                </ng-template>
+            </ngx-datatable-column>
+    
+            <ngx-datatable-column name="batchName">
+                <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
+                    {{value}}
+                </ng-template>
+            </ngx-datatable-column>
+    
+            <ngx-datatable-column name="Batch Time" prop="batchTime">
+                <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
+                    {{value}}
+                </ng-template>
+            </ngx-datatable-column>
+    
+            <ngx-datatable-column name="viewDetails">
+                <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
+                    <!-- <button mat-flat-button (click)="getPlayer(row.pid)" color="primary">View Details</button> -->
+                    <!-- <button mat-raised-button (click)="getPlayerPop(row.trainerId)" color="primary">View Details</button> -->
+                    <button type="button" class="btn btn-info" (click)="viewBatchDetailsByBatchId(row)">View Details</button>
+                </ng-template>
+            </ngx-datatable-column>
+        </ngx-datatable>
+        </div>
+
+        <div class="container" *ngIf="!isTrainterData && isBatchDt">
+
+            <div class="row justify-content-center">
+                <h1>{{btchDt}}</h1>
+            </div>
+            <ngx-datatable
+                #table2
+                class="material"
+                [columns]="columns"
+                [columnMode]="'force'"
+                [headerHeight]="50"
+                [footerHeight]="50"
+                [rowHeight]="'auto'"
+                [limit]="10"
+                [rows]="rows">
+                <ngx-datatable-column name="No" prop="employeeId">
+                    <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
+                        {{value}}
+                    </ng-template>
+                </ngx-datatable-column>
+        
+                <ngx-datatable-column  name="Firstname" prop="employeeFn">
+                    <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
+                        {{value}}
+                    </ng-template>
+                </ngx-datatable-column>
+        
+                <ngx-datatable-column name="Lastname" prop="employeeLn">
+                    <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
+                        {{value}}
+                    </ng-template>
+                </ngx-datatable-column>
+        
+                <ngx-datatable-column name="viewDetails">
+                    <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
+                        <!-- <button mat-flat-button (click)="getPlayer(row.pid)" color="primary">View Details</button> -->
+                        <!-- <button mat-raised-button (click)="getPlayerPop(row.trainerId)" color="primary">View Details</button> -->
+                        <button type="button" class="btn btn-info" (click)="getStudentDetails(row.employeeId)">View Details</button>
+                    </ng-template>
+                </ngx-datatable-column>
+            </ngx-datatable>
+            </div>
+
+            <div class="modal" id="addBatchStuModal">
+                <div class="modal-dialog modal-md">
+                  <div class="modal-content">
+              
+                    <!-- Modal Header -->
+                    <div class="modal-header">
+                      <h4 class="modal-title">Add Batch</h4>
+                      <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+              
+                    <!-- Modal body -->
+                    <div class="modal-body">
+                        <input name='empId' class="form-control col-sm-1 d-none" [(ngModel)]="empId" >
+                        <ngx-select-dropdown 
+                            (change)="selectionChanged($event)" 
+                            [config]="config" 
+                            [options]="dropdownOptions">
+                        </ngx-select-dropdown>
+        
+                        <button class="btn btn-secondary mt-4 justify-content-end" (click)="addBatchToTrainer()">Add Batch </button>
+                    </div>
+              
+                    <!-- Modal footer -->
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-danger" id="addBatchClose" data-dismiss="modal">Close</button>
+                    </div>
+              
+                  </div>
+                </div>
+              </div>
+
+              <div class="modal" id="editTrainerDetails">
+                <div class="modal-dialog modal-lg">
+                  <div class="modal-content">
+              
+                    <!-- Modal Header -->
+                    <div class="modal-header">
+                      <h4 class="modal-title">Trainer Details</h4>
+                      <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+              
+                    <!-- Modal body -->
+                    <div class="modal-body">
+                        <div class="row justify-content-center">
+                            <h1>{{updateTrainerModelData}}</h1>
+                        </div>
+                        <input name='trId' class="form-control col-sm-1 d-none" [(ngModel)]="trId" >
+                        <div class="form-group">
+                            <label for="trName">Trainer Name</label>
+                            <input class="form-control" id='trName' type="text" name="trainerName" [(ngModel)]='trainerName' >
+                        </div>
+                        <div class="form-group">
+                            <label for="emailId">Email Id</label>
+                            <input class="form-control" id='emailId' type="email" name="emailId" [(ngModel)]='emailId' >
+                        </div>
+                        <div class="col-lg-12 justify-content-center">
+                            <div class="form-group">
+                                <button class="btn col-lg-12 btn-success" (click)='updateTrainerData()'>Update</button>
+                            </div>                        
+                        </div>
+                    </div>
+              
+                    <!-- Modal footer -->
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-danger" id="closeTrainerUpdateModal" data-dismiss="modal">Close</button>
+                    </div>
+              
+                  </div>
+                </div>
+              </div>
