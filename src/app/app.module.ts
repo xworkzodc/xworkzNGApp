@@ -20,6 +20,7 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { AddBatchComponent } from './add-batch/add-batch.component';
 import { ViewBatchComponent } from './view-batch/view-batch.component';
 import { CourseDetailsComponent } from './course-details/course-details.component';
+
 @NgModule({
   declarations: [
     AppComponent ,
@@ -44,7 +45,7 @@ import { CourseDetailsComponent } from './course-details/course-details.componen
     SelectDropDownModule,
     BrowserAnimationsModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
