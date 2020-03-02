@@ -79,8 +79,8 @@ class="material"
 <ngx-datatable-column name="status" prop="isActive" [width]="80">
     <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
         <!-- {{value}} -->
-        <button type="button" class="btn btn-info" (click)="changeBatchStatus(row)" *ngIf='row.isActive'>Actived</button>
-        <button type="button" class="btn btn-danger" (click)="changeBatchStatus(row)" *ngIf='!row.isActive'>Deactived</button>
+        <div *ngIf='row.isActive'>Activated</div>
+        <div *ngIf='!row.isActive' >Deactivated</div>
     </ng-template>
 </ngx-datatable-column>
 

@@ -1,4 +1,5 @@
 import { HttpClientModule } from '@angular/common/http';
+// import { HttpClientModule } from '@angular/common/http';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
@@ -19,7 +20,6 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { AddBatchComponent } from './add-batch/add-batch.component';
 import { ViewBatchComponent } from './view-batch/view-batch.component';
 import { CourseDetailsComponent } from './course-details/course-details.component';
-
 @NgModule({
   declarations: [
     AppComponent ,
@@ -33,7 +33,7 @@ import { CourseDetailsComponent } from './course-details/course-details.componen
     AddStudentBatchComponent,
     AddBatchComponent,
     ViewBatchComponent,
-    CourseDetailsComponent,
+    CourseDetailsComponent
 
   ],
   imports: [

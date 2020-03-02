@@ -2,8 +2,8 @@ import { PageData } from './../model/page-data';
 import { environment } from './../../environments/environment';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, Observer, of } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { Observable, Observer, of, observable } from 'rxjs';
+import { map, catchError } from 'rxjs/operators';
 import { Student } from '../model/student';
 import { Page } from '../model/page';
 // import 'rxjs/add/operator/mapc';
@@ -16,9 +16,23 @@ export class BatchService {
     return this.httpClient.put(environment.apiUrl+'updateBatchData',value, {responseType:'json',observe:'response'});
   }
   
-  saveBatchData(value: any) {
+  saveBatchData(value: any) : Observable<any> {
     // console.log(value);
-    return this.httpClient.post(environment.apiUrl+'saveBatchData',value,{observe:'response',responseType:'json'});
+    return this.httpClient.post(environment.apiUrl+'saveBatchData',value,{observe:'response',responseType:'json'}).pipe(map(response=>{
+      if(!response){
+
+      }
+      return response
+    }),
+    catchError(errorObj=>{
+      console.log("errorObj");
+      if(errorObj && errorObj.error){
+        console.log(errorObj);
+        // return errorObj.status;
+      }
+      return null;
+    })
+    )
   }
   updateBatchStatusById(batchId: any) {
     return this.httpClient.put(environment.apiUrl +'updateBatchStatusById/', {'batchId':batchId} , {observe : "response", responseType:'json'} );

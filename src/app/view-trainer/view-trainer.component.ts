@@ -51,11 +51,12 @@ export class ViewTrainerComponent implements OnInit {
     });  
   }
 
-
-  getBatchesByTrainerId(id){
+  empName='';
+  getBatchesByTrainerId(user){
     // console.log("id is "+id);
-    this.empId=id;
-    this.trainerService.getBatchDetailsByTrainerId(id).subscribe(data =>{
+    this.empId=user.trainerId;
+    this.empName = user.trainerName;
+    this.trainerService.getBatchDetailsByTrainerId(user.trainerId).subscribe(data =>{
       // console.log(data);
       this.isTrainterData = false;
       this.isBatchDt= false;
@@ -102,6 +103,11 @@ export class ViewTrainerComponent implements OnInit {
         });
       }
     }
+  }
+
+  addTrainerBtn(){
+    console.log('called........');
+    this.route.navigate(['/addTrainer']);
   }
 
   selectionChanged(event){

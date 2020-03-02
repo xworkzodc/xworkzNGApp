@@ -16,7 +16,7 @@ export class AddBatchComponent implements OnInit {
     batchType : new FormControl('',[Validators.required]),
     batchTime : new FormControl('' , [Validators.required]),
     courseName : new FormControl ('', [Validators.required]),
-    totalBatches: new FormControl ('',[Validators.required])
+    totalBatches: new FormControl ('',[Validators.required, Validators.pattern('[0-9]*')])
   });
   courseText='';
   constructor(private courseService: CourseService , private formBuilder : FormBuilder, private batchService:BatchService) { }
@@ -59,15 +59,25 @@ export class AddBatchComponent implements OnInit {
 
     if(this.batchData.status== 'VALID')
       this.batchService.saveBatchData(this.batchData.value).subscribe(data=>{
-        if(data.status==201){
+        // console.log(data.status);
+        console.log(data);
+        if(data==405){
+          this.addBatchTxt = "batch name is already available try with different batch name"
+          // this.addBatchTxt = this.batchData.controls.batchName.value+' is not added successfully. please try again later';  
+          console.log('data is not saved successfully.....................');
+        }else if(data.status==201){
           // console.log(data);
           this.addBatchTxt = this.batchData.controls.batchName.value+' is added successfully..............';  
          document.getElementById('formReset').click();
-        }else{
+        } else{
           this.addBatchTxt = this.batchData.controls.batchName.value+' is not added successfully. please try again later';  
           console.log('data is not saved successfully.....................');
         }
       });
+  }
+
+  get getBatchData(){
+    return this.batchData.controls;
   }
 }
 

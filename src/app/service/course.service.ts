@@ -7,6 +7,11 @@ import { environment } from 'src/environments/environment';
 })
 export class CourseService {
 
+  saveNewCourse(courseFormData){
+    console.log(courseFormData);
+    return this.httpClient.post(environment.apiUrl +'saveCourse', courseFormData,{observe:'response', responseType: 'json'});
+  }
+
   getAllCourseNames() {
     return this.httpClient.get(environment.apiUrl+'getAllCourseNames')
   }
