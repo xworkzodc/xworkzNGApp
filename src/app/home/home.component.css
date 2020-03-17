@@ -1,0 +1,11 @@
+.my-card{
+
+    border-radius: 8px;
+    /* z-index: 2000; */
+    margin-left: 5px;
+    margin-right: 5px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    background-color: azure;
+    box-shadow: 2px 3px 10px 1px bisque;
+}

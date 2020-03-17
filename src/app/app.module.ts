@@ -15,15 +15,17 @@ import { StudentsComponent } from './students/students.component';
 import { SelectDropDownModule } from 'ngx-select-dropdown';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { StudentDataComponent } from './student-data/student-data.component';
-import { AddStudentBatchComponent } from './add-student-batch/add-student-batch.component'
-import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import { AddStudentBatchComponent } from './add-student-batch/add-student-batch.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AddBatchComponent } from './add-batch/add-batch.component';
 import { ViewBatchComponent } from './view-batch/view-batch.component';
 import { CourseDetailsComponent } from './course-details/course-details.component';
-
+import { NgbDate, NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { StudAttDataComponent } from './stud-att-data/stud-att-data.component';
+// import { IgxCardModule } from 'igniteui-angular';
 @NgModule({
   declarations: [
-    AppComponent ,
+    AppComponent,
     HeaderComponent,
     ViewAttendanceComponent,
     AddTrainerComponent,
@@ -34,7 +36,8 @@ import { CourseDetailsComponent } from './course-details/course-details.componen
     AddStudentBatchComponent,
     AddBatchComponent,
     ViewBatchComponent,
-    CourseDetailsComponent
+    CourseDetailsComponent,
+    StudAttDataComponent
 
   ],
   imports: [
@@ -46,8 +49,11 @@ import { CourseDetailsComponent } from './course-details/course-details.componen
     BrowserAnimationsModule,
     FormsModule,
     ReactiveFormsModule,
+    NgbModule
+    // IgxCardModule
   ],
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+}

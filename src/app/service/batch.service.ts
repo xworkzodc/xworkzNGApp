@@ -12,6 +12,12 @@ import { Page } from '../model/page';
   providedIn: 'root'
 })
 export class BatchService {
+ 
+
+
+  changeTshirtStatus(employeeId: any) {
+    return this.httpClient.put(environment.apiUrl+'updateStudentTshirtDataById/'+employeeId,{observe:'response',responseType:'json'});
+  }
   upadateBatchDataService(value: any) {
     return this.httpClient.put(environment.apiUrl+'updateBatchData',value, {responseType:'json',observe:'response'});
   }

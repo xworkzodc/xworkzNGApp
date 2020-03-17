@@ -57,6 +57,24 @@ export class StudentsComponent implements OnInit {
     });
   }
 
+  changeTshirtStatus(row){
+    if(confirm("did trainee got t-shirt?")){
+    this.batchService.changeTshirtStatus(row.employeeId).subscribe(rs =>{
+      // if(rs.status==200){
+        console.log(rs);
+        if(rs==1)
+        // if(row.isGtTshrt== true){
+          row.isGtTshrt = true;
+        // }else{
+        //   row.isGtTshrt = true;
+        // }
+      // }
+    });
+      // console.log('yes');
+    }
+  
+  }
+
   getStudentById(employeeId){
     // console.log(employeeId);
     this.route.navigate(['/studentData'],{queryParams: {'stId':employeeId}});

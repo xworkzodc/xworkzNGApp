@@ -68,16 +68,16 @@ export class CourseDetailsComponent implements OnInit {
     this.courseId = data.courseId;
     this.courseName= data.courseName;
     this.fee = data.rate;
-    this.noOfHours = data.noOfHours;
+    this.noOfHours = data.noOfHrs;
   }
 
   updateCourse(){
     if(this.courseName!=null && this.fee != null){
       if(this.courseName.length>0 && this.fee>0){
-        this.courseService.updateCourse(this.courseId, this.courseName , this.fee).subscribe(data =>{
+        this.courseService.updateCourse(this.courseId, this.courseName , this.fee , this.noOfHours).subscribe(data =>{
           if(data.status == 200){
             document.getElementById('updateCourseModal').click();
-            this.courseText= this.courseName+' is successfully added......';
+            this.courseText= this.courseName+' is successfully updated......';
             this.fee='';
             this.courseName='';
             this.getAllCourses();

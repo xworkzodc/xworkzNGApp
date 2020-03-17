@@ -1,10 +1,37 @@
 <div class="container-fluid">
 
-    <div class="row form-group ml-3">
-        <label for="exampleInputEmail1" class="col-sm-1 font-weight-bold" style="padding-top: 5px;">search</label>
-        <div class="col-md-6">
-            <input type="email" class="form-control col-md-6" #search  (keyup)="updateFilter($event)"  aria-describedby="emailHelp" placeholder="Search by name or contact number or email">
-            <small id="emailHelp" class="form-text text-muted">Search by student name, batch name or course name.</small>
+    <div class="row ml-3">
+        <div class="form-group col-md-4">
+            <label for="emailInput" class="col-md-12 font-weight-bold" style="padding-top: 5px;">search</label>
+            <div class="col-md-12">
+                <input type="email" class="form-control col-md-12" id="emailInput" #search  (keyup)="updateFilter($event)"  aria-describedby="emailHelp" placeholder="Search by name or contact number or email">
+                <small id="emailInput" class="form-text text-muted">Search by student name, batch name or course name.</small>
+            </div>
+        </div>
+        <div class="form-group col-md-4">
+            <label for="" class="col-sm-3 font-weight-bold" style="padding-top: 5px;">Select Date</label>
+            <div class="col-md-12">
+                <div class="input-group">
+                    <input
+                        class="form-control col-md-6"
+                        placeholder="yyyy-mm-dd"
+                        name="dp"
+                        [(ngModel)]="model"
+                        ngbDatepicker="ngbDatepicker"
+                        #d="ngbDatepicker" (click)="d.toggle()" autocomplete="off" readonly>
+                        <div class="input-group-append">
+                            <button class="fa fa-calendar" (click)="d.toggle()" type="button"></button>
+                        </div>
+                    </div>
+
+                <small id="emailHelp" class="form-text text-muted">Select the date</small>
+            </div>
+        </div>
+        <div class="form-group col-md-4">
+            <label for="" class="col-md-12 font-weight-bold" style="padding-top: 5px;">Search By date and batch name</label>
+            <div class="col-md-12">
+                <button class="btn btn-info col-md-6" (click)="searchByDateNbatchName(search.value)">Search</button>
+            </div>
         </div>
     </div>
 
@@ -16,7 +43,7 @@ class="material"
 [footerHeight]="50"
 [rowHeight]="'auto'"
 [limit]="10"
-[rows]="rows">
+[rows]="rows" *ngIf="isAtt">
 
 
 <ngx-datatable-column name="Id" prop="id">
@@ -95,4 +122,35 @@ class="material"
 
 </ngx-datatable>
 
+
+<ngx-datatable
+#table
+class="material"
+[columnMode]="'force'"
+[headerHeight]="50"
+[footerHeight]="50"
+[rowHeight]="'auto'"
+[limit]="10"
+[rows]="rows" *ngIf="!isAtt">
+<ngx-datatable-column name="Total Students" prop="total">
+    <ng-template  ngx-datatable-cell-template="ngx-datatable-cell-template" let-rowIndex="rowIndex"  let-value="value" let-row="row">
+        <button class="btn btn-lg btn-block btn-outline-dark" (click)="getStudsAttByDtNBtch('1')">
+        {{value}}
+    </button>
+    </ng-template>
+</ngx-datatable-column>
+<ngx-datatable-column name="Total Present" prop="totalPresent">
+    <ng-template  ngx-datatable-cell-template="ngx-datatable-cell-template" let-rowIndex="rowIndex"  let-value="value" let-row="row">
+        <button class="btn btn-lg btn-block btn-outline-info" (click)="getStudsAttByDtNBtch('2')">
+            {{value}}
+        </button> 
+    </ng-template>
+</ngx-datatable-column>
+<ngx-datatable-column name="Total Absent" prop="totalAbsent">
+    <ng-template  ngx-datatable-cell-template="ngx-datatable-cell-template" let-rowIndex="rowIndex"  let-value="value" let-row="row">
+        <button class="btn btn-lg btn-block btn-outline-primary" (click)="getStudsAttByDtNBtch('3')">
+            {{value}}
+        </button>    </ng-template>
+</ngx-datatable-column>
+  </ngx-datatable>
 </div>

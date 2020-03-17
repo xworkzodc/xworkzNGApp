@@ -11,12 +11,14 @@ import { Component, OnInit } from '@angular/core';
 export class AddBatchComponent implements OnInit {
   dropdownOptions:any=[];
   addBatchTxt:any = '';
+  model;
   batchData = new FormGroup({
     batchName:new FormControl('',[Validators.required]),
     batchType : new FormControl('',[Validators.required]),
     batchTime : new FormControl('' , [Validators.required]),
     courseName : new FormControl ('', [Validators.required]),
-    totalBatches: new FormControl ('',[Validators.required, Validators.pattern('[0-9]*')])
+    totalBatches: new FormControl ('',[Validators.required, Validators.pattern('[0-9]*')]),
+    startDate : new FormControl('',[Validators.required])
   });
   courseText='';
   constructor(private courseService: CourseService , private formBuilder : FormBuilder, private batchService:BatchService) { }
@@ -74,6 +76,7 @@ export class AddBatchComponent implements OnInit {
           console.log('data is not saved successfully.....................');
         }
       });
+    console.log(this.batchData.value);
   }
 
   get getBatchData(){

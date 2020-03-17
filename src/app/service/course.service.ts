@@ -15,12 +15,14 @@ export class CourseService {
   getAllCourseNames() {
     return this.httpClient.get(environment.apiUrl+'getAllCourseNames')
   }
-  updateCourse(courseId: number, courseName: string, fee: any) {
+  updateCourse(courseId: number, courseName: string, fee: any,noOfHours:number) {
     var data = {
       'courseId' : courseId ,
       'courseName' : courseName,
-      'fee' : fee
+      'fee' : fee,
+      'noOfHr':noOfHours
     }
+  // console.log(data);  
    return  this.httpClient.put(environment.apiUrl+'updateCourseDetails' , data,{observe:'response', responseType : 'json'})
   }
   saveNewCourseDetails(courseName: any, fee: any) {

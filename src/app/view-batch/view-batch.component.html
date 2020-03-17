@@ -47,6 +47,14 @@
             </ng-template>
         </ngx-datatable-column>
 
+        <ngx-datatable-column name="Start Date" prop="startDate">
+            <ng-template  ngx-datatable-cell-template="ngx-datatable-cell-template" let-rowIndex="rowIndex"  let-value="value" let-row="row">
+
+                {{value}}
+            
+            </ng-template>
+        </ngx-datatable-column>
+
         <ngx-datatable-column name="Fees" prop="fees">
             <ng-template  ngx-datatable-cell-template="ngx-datatable-cell-template" let-rowIndex="rowIndex"  let-value="value" let-row="row">
 

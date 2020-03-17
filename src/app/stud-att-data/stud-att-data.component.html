@@ -1,0 +1,81 @@
+<div class="container">
+    <div class="row justify-content-center">
+        <h4>{{batchName}}</h4>
+    </div>
+    <div class="row justify-content-center">
+        <h4>{{attType}}
+            students on
+            {{date}}</h4>
+    </div>
+
+    <ngx-datatable
+        #table
+        class="material"
+        [columnMode]="'force'"
+        [headerHeight]="50"
+        [footerHeight]="50"
+        [rowHeight]="'auto'"
+        [limit]="10"
+        [rows]="rows">
+
+        <!-- <ngx-datatable-column name="Id" prop="id"> <ng-template
+        ngx-datatable-cell-template="ngx-datatable-cell-template"
+        let-rowIndex="rowIndex" let-value="value" let-row="row"> {{value}}
+        </ng-template> </ngx-datatable-column> -->
+
+        <ngx-datatable-column name="Student Name" prop="stName">
+            <ng-template
+                ngx-datatable-cell-template="ngx-datatable-cell-template"
+                let-rowIndex="rowIndex"
+                let-value="value"
+                let-row="row">
+
+                {{value}}
+
+            </ng-template>
+        </ngx-datatable-column>
+
+        <ngx-datatable-column name="Attendence" prop="isPresent">
+            <ng-template
+                ngx-datatable-cell-template="ngx-datatable-cell-template"
+                let-rowIndex="rowIndex"
+                let-value="value"
+                let-row="row">
+                <div *ngIf='row.isPresent'>Present</div>
+                <div *ngIf='!row.isPresent'>Absent</div>
+            </ng-template>
+        </ngx-datatable-column>
+
+        <ngx-datatable-column name="Batch Type" prop="batchType">
+            <ng-template
+                ngx-datatable-cell-template="ngx-datatable-cell-template"
+                let-rowIndex="rowIndex"
+                let-value="value"
+                let-row="row">
+
+                {{value}}
+
+            </ng-template>
+        </ngx-datatable-column>
+
+        <ngx-datatable-column name="status" prop="isActive" [width]="80">
+            <ng-template
+                ngx-datatable-cell-template="ngx-datatable-cell-template"
+                let-rowIndex="rowIndex"
+                let-value="value"
+                let-row="row">
+                <!-- {{value}} -->
+                <div *ngIf='row.isActive'>Activated</div>
+                <div *ngIf='!row.isActive'>Deactivated</div>
+            </ng-template>
+        </ngx-datatable-column>
+
+        <!-- <ngx-datatable-column name="Action" > <ng-template
+        ngx-datatable-cell-template="ngx-datatable-cell-template"
+        let-rowIndex="rowIndex" let-value="value" let-row="row"> {{value}} <button
+        type="button" class="btn btn-success disable" (click)="editDetails(row)"
+        >Edit</button> </ng-template> </ngx-datatable-column> -->
+
+    </ngx-datatable>
+
+</div>
