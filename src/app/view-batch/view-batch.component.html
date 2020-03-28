@@ -63,10 +63,11 @@
             </ng-template>
         </ngx-datatable-column>
 
-        <ngx-datatable-column name="status" prop="isActive" [width]="80">
-            <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
-                <button type="button" class="btn btn-info" (click)="changeBatchStatus(row)" *ngIf='row.isActive'>Actived</button>
-                <button type="button" class="btn btn-danger" (click)="changeBatchStatus(row)" *ngIf='!row.isActive'>Deactived</button>
+        <ngx-datatable-column name="status" prop="batchStatus" [width]="80">
+            <ng-template  ngx-datatable-cell-template="ngx-datatable-cell-template" let-rowIndex="rowIndex"  let-value="value" let-row="row">
+
+                {{value}}
+            
             </ng-template>
         </ngx-datatable-column>
 
@@ -143,6 +144,16 @@
                         ></ngx-select-dropdown>
                     </div>
     
+
+                    <div class="form-group">
+                        <label for="batchStatus">Select Batch Status:</label>
+                        <ngx-select-dropdown 
+                        (change)="selectionBatchChanged($event)" 
+                        [config]="config1" 
+                        [options]="dropdownOptions1"
+                        formControlName="batchStatus"
+                        ></ngx-select-dropdown>
+                    </div>
                     <!-- <div class="form-control">
                         <label for=""></label>
                     </div> -->

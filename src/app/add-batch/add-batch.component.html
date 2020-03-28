@@ -133,6 +133,16 @@
                                 </div>
                             </div>
 
+                            <div class="form-group">
+                                <label for="batchStatus">Select Batch Status:</label>
+                                <ngx-select-dropdown 
+                                (change)="selectionBatchChanged($event)" 
+                                [config]="config1" 
+                                [options]="dropdownOptions1"
+                                formControlName="batchStatus"
+                                ></ngx-select-dropdown>
+                            </div>
+
                             <div class="input-group">
                                 <!-- <input class="form-control" placeholder="yyyy-mm-dd" name="dp"
                                 [(ngModel)]="model" ngbDatepicker #d="ngbDatepicker"> -->

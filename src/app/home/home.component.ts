@@ -1,5 +1,4 @@
 import { BatchService } from './../service/batch.service';
-import { Card } from './card.blueprint';
 import { Component, OnInit } from '@angular/core';
 @Component({
   selector: 'app-home',
