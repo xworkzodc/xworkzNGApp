@@ -62,6 +62,14 @@
                 <button type="button" class="btn btn-warning" (click)="changeTshirtStatus(row)" *ngIf='!row.isGtTshrt'>Update</button>
             </ng-template>
         </ngx-datatable-column>
+
+
+        <ngx-datatable-column name="Fees Status" prop="feesStatus" [width]="80">
+            <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
+                <div *ngIf="row.feesStatus">Paid</div>
+                <div *ngIf="!row.feesStatus">Not Paid</div>
+            </ng-template>
+        </ngx-datatable-column>
         
         <ngx-datatable-column name="status" prop="isActive" [width]="80">
             <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
@@ -74,7 +82,7 @@
             <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
                 <!-- <button mat-flat-button (click)="getPlayer(row.pid)" color="primary">View Details</button> -->
                 <!-- <button mat-raised-button (click)="getPlayerPop(row.trainerId)" color="primary">View Details</button> -->
-                <button type="button" class="btn btn-info" (click)="getStudentById(row.employeeId)">View Details</button>
+                <button type="button" class="btn btn-info" (click)="getStudentById(row.employeeId)">Details</button>
             </ng-template>
         </ngx-datatable-column>
     </ngx-datatable>

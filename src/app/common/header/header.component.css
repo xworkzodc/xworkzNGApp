@@ -1,8 +1,7 @@
-nav{
-    /* height:60px; */
-    /* margin-bottom: 800px; */
+nav.navbar{
+    padding: 0.2rem 1rem !important;
 }
 
 .myHeader{
-    margin-bottom:  150px;
+    margin-bottom:  100px;
 }

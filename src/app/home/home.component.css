@@ -1,11 +1,42 @@
-.my-card{
+.card-body {
+    -webkit-box-flex: 1;
+    flex: 1 1 auto;
+    min-height: 1px;
+    padding: 0.25rem;
+}
 
-    border-radius: 8px;
-    /* z-index: 2000; */
-    margin-left: 5px;
-    margin-right: 5px;
+.card-title {
+    font-weight: 900;
+    font-size: 1.1rem;
+    /* letter-spacing: 0.015625rem; */
+    text-transform: none;
+    margin-top: 1.0rem;
+    margin-bottom: 0;
+}
+
+.card-text {
+    font-weight: 600;
+    font-size: .80rem;
+    letter-spacing: 0 !important;
+    text-transform: none;
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+
+}
+
+.card{
     margin-top: 5px;
     margin-bottom: 5px;
-    background-color: azure;
-    box-shadow: 2px 3px 10px 1px bisque;
+    box-shadow: 2px 2px 5px 0px;
+    background-color: aliceblue;
+}
+.card.col-sm-3 {
+    width: 23%;
+    margin-left: 5px;
+    margin-right: 5px;
+    max-width: 23%;
+}
+
+a.card-link{
+    font-weight: 800;
 }

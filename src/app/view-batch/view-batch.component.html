@@ -55,7 +55,7 @@
             </ng-template>
         </ngx-datatable-column>
 
-        <ngx-datatable-column name="Fees" prop="fees">
+        <ngx-datatable-column name="Fees" prop="batchFees">
             <ng-template  ngx-datatable-cell-template="ngx-datatable-cell-template" let-rowIndex="rowIndex"  let-value="value" let-row="row">
 
                 {{value}}
@@ -114,6 +114,11 @@
                         </label>
                         <input name="batchId" type="hidden" formControlName="batchId"> 
                         <input id="batchName" formControlName="batchName" type="text" placeholder="enter batch name" class="form-control col-sm-12">
+                        <div
+                        class="error"
+                        *ngIf="getBatchData.batchName.invalid && getBatchData.batchName.touched">
+                        <div *ngIf="getBatchData.batchName.errors.required">Batch Name is required</div>
+                    </div>
                     </div>
     
                     <div class="form-group">
@@ -125,6 +130,11 @@
                             <option value="Weekdays">Weekdays</option>
                             <option value="Weekends">Weekends</option>
                         </select>
+                        <div
+                        class="error"
+                        *ngIf="getBatchData.batchType.invalid && getBatchData.batchType.touched">
+                        <div *ngIf="getBatchData.batchType.errors.required">Batch type is required</div>
+                    </div>
                     </div>
     
                     <div class="form-group">
@@ -132,8 +142,29 @@
                             Batch Time:
                         </label>
                         <input formControlName="batchTime" id="batchTime"  class="form-control" placeholder="enter batch time">
+                        <div
+                        class="error"
+                        *ngIf="getBatchData.batchTime.invalid && getBatchData.batchTime.touched">
+                        <div *ngIf="getBatchData.batchTime.errors.required">Batch time is required</div>
+                        <div *ngIf="getBatchData.batchTime.errors.pattern">Pattern should match</div>
+                    </div>
+                    </div>
+
+
+                    <div class="form-group">
+                        <label for="batchFees">
+                            Batch Fees:
+                        </label>
+                        <input formControlName="batchFees" id="batchFees"  class="form-control" placeholder="enter batch fees">
+                        <div
+                        class="error"
+                        *ngIf="getBatchData.batchFees.invalid && getBatchData.batchFees.touched">
+                        <div *ngIf="getBatchData.batchFees.errors.required">fees is required</div>
+                        <div *ngIf="getBatchData.batchFees.errors.pattern">fees should be numbers only</div>
+                    </div>
                     </div>
                     
+
                     <div class="form-group">
                         <label for="courseName">Select Course Name:</label>
                         <ngx-select-dropdown 
@@ -142,8 +173,65 @@
                         [options]="dropdownOptions"
                         formControlName="courseName"
                         ></ngx-select-dropdown>
+
+                        <div
+                        class="error"
+                        *ngIf="getBatchData.courseName.invalid && getBatchData.courseName.touched">
+                        <div *ngIf="getBatchData.courseName.errors.required">Course name is required</div>
                     </div>
-    
+                    </div>
+
+                    <div class="form-group">
+                        <label for="totalBatches">
+                            No. of Session:
+                        </label>
+                        <input
+                            formControlName="totalBatches"
+                            id="totalBatches"
+                            type="text"
+                            pattern="[0-9]*"
+                            class="form-control col-md-6"
+                            placeholder="enter total number of batches">
+                            <div
+                            class="error"
+                            *ngIf="getBatchData.totalBatches.invalid && getBatchData.totalBatches.touched">
+                            <div *ngIf="getBatchData.totalBatches.errors.required">Total number of batches is required</div>
+                            <div *ngIf="getBatchData.totalBatches.errors.pattern">only numbers allowed</div>
+                        </div>
+                        </div>
+
+
+                    <div class="form-group">
+                        <label for="startDate">
+                            Select Start Date
+                        </label>
+                        <!-- <input type="text" [(ngModel)]="model" formControlName="startDate"
+                        ngbDatepicker #d="ngbDatepicker" (focus)="d.open()" class="form-control"/> -->
+                        <div class="input-group">
+                            <input
+                                formControlName="startDate"
+                                class="form-control col-md-6"
+                                placeholder="yyyy-mm-dd"
+                                name="startDate"
+                                [(ngModel)]="stDt"
+                                ngbDatepicker="ngbDatepicker"
+                                #d="ngbDatepicker" (click)="d.toggle()"
+                                autocomplete="off"
+                                readonly="readonly"
+                                >
+                                <div class="input-group-append">
+                                    <button class="fa fa-calendar" (click)="d.toggle()" type="button"></button>
+                                </div>
+                            </div>
+                            <div
+                                    class="error"
+                                    *ngIf="getBatchData.startDate.invalid && getBatchData.startDate.touched">
+                                    <div *ngIf="getBatchData.startDate.errors.required">Start date is required</div>
+                                </div>
+
+                        </div>
+
+
 
                     <div class="form-group">
                         <label for="batchStatus">Select Batch Status:</label>
@@ -160,7 +248,7 @@
                     
                     <div class="form-group mb-3">
                             <div class=" row justify-content-center pl-0 mb-4">
-                                <button type="submit" class="col-lg-8 btn btn-success justify-content-center" >Update</button>
+                                <button type="submit" class="col-lg-8 btn btn-success justify-content-center"  [disabled]='batchData.invalid'>Update</button>
                             </div>
                             
                     </div>

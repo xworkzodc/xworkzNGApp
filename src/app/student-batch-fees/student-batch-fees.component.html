@@ -1,0 +1,54 @@
+<p>student-batch-fees works!</p>
+<div class="container">
+
+    <div class="row justify-content-between mb-4">
+        <h5 class="justify-content-start">Student Name: {{stName}}</h5>
+        <h5 class="justify-content-end">Batch Name: {{batchName}}</h5>
+    </div>
+
+    <ngx-datatable
+        class="material"
+        [columnMode]="'force'"
+        [headerHeight]="50"
+        [footerHeight]="50"
+        [rowHeight]="'auto'"
+        [limit]="10"
+        [rows]="rows">
+
+ 
+        <ngx-datatable-column name="Date" prop="paidDate">
+            <ng-template
+                ngx-datatable-cell-template="ngx-datatable-cell-template"
+                let-rowIndex="rowIndex"
+                let-value="value"
+                let-row="row">
+
+                {{value}}
+
+            </ng-template>
+        </ngx-datatable-column>
+
+        <ngx-datatable-column name="Trasaction Number" prop="transactionId">
+            <ng-template
+                ngx-datatable-cell-template="ngx-datatable-cell-template"
+                let-rowIndex="rowIndex"
+                let-value="value"
+                let-row="row">
+                {{value}}
+            </ng-template>
+        </ngx-datatable-column>
+
+        <ngx-datatable-column name="Amount" prop="amount">
+            <ng-template
+                ngx-datatable-cell-template="ngx-datatable-cell-template"
+                let-rowIndex="rowIndex"
+                let-value="value"
+                let-row="row">
+
+                {{value}}
+
+            </ng-template>
+        </ngx-datatable-column>
+
+    </ngx-datatable>
+</div>

@@ -65,6 +65,7 @@ export class AddStudentBatchComponent implements OnInit {
   pageData:any;
   setPage(pageInfo){
     this.page.pageNumber = pageInfo.offset;
+    this.page.size = 20;
     this.batchService.getPagedData(this.page).subscribe(
       data=>{
         this.rows = data[1];
@@ -181,7 +182,7 @@ export class AddStudentBatchComponent implements OnInit {
   updateStudent(studentData){
       this.studentService.updateStudentData(studentData.value).subscribe(data=>{
         if(data.status==200){
-          this.setPage({offset:this.page.pageNumber});
+          this.setPage({ offset: 0 });
           document.getElementById("stDataId").click();
         }
       },

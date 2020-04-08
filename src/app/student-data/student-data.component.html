@@ -57,7 +57,7 @@
             </ng-template>
         </ngx-datatable-column>
 
-        <ngx-datatable-column name="Paid" prop="totalPaid">
+        <ngx-datatable-column name="Total Paid" prop="totalPaid">
             <ng-template  ngx-datatable-cell-template="ngx-datatable-cell-template" let-rowIndex="rowIndex"  let-value="value" let-row="row">
 
                 {{value}}
@@ -66,7 +66,7 @@
         </ngx-datatable-column>
 
 
-        <ngx-datatable-column name="Pending" prop="pending">
+        <ngx-datatable-column name="Pending" prop="totalPending">
             <ng-template  ngx-datatable-cell-template="ngx-datatable-cell-template" let-rowIndex="rowIndex"  let-value="value" let-row="row">
 
                 {{value}}
@@ -74,15 +74,22 @@
             </ng-template>
         </ngx-datatable-column>
 
-        <ngx-datatable-column name="fees Status" prop="feesStatus">
+
+
+        <ngx-datatable-column name="fees Status" prop="isPaid">
             <ng-template  ngx-datatable-cell-template="ngx-datatable-cell-template" let-rowIndex="rowIndex"  let-value="value" let-row="row">
 
                 <!-- {{value}} -->
-                <button type="button"  class="btn btn-info disable" *ngIf="row.pending==0" >Fees Paid</button>
-                <button type="button"  class="btn btn-info" *ngIf="row.pending>0" data-toggle="modal" data-target="#feesData" (click)="updateFees(row)">update</button>
+                <div *ngIf="row.isPaid">Fees Paid</div>
+                <button type="button"  class="btn btn-info" *ngIf="!row.isPaid" data-toggle="modal" data-target="#feesData" (click)="updateFees(row)">update</button>
             </ng-template>
         </ngx-datatable-column>
 
+        <ngx-datatable-column name="View" >
+            <ng-template  ngx-datatable-cell-template="ngx-datatable-cell-template" let-rowIndex="rowIndex"  let-value="value" let-row="row">
+                <button class="btn btn-success" [disabled]="row.totalPaid == 0" (click)="getStuTransactionByBatch(row)">View</button>
+            </ng-template>
+        </ngx-datatable-column>
         <!-- <ngx-datatable-column name="Action">
             <ng-template  ngx-datatable-cell-template="ngx-datatable-cell-template" let-rowIndex="rowIndex" let-value="value" let-row="row">
                 
@@ -109,18 +116,70 @@
             <div class="row justify-content-center">
                 <h5>{{updateFeesData}}</h5>
             </div>
-            <input name='stId' type="hidden" class="form-control col-sm-1 d-none" [(ngModel)]="stId" >
-            <input name='courseId' type="hidden" class="form-control col-sm-1 d-none" [(ngModel)]="courseId" >
-            <input name='pending' type="hidden" class="form-control col-sm-1 d-none" [(ngModel)]="pending" >
-            <div class="form-group">
-                <label for="trName">Paying:</label>
-                <input class="form-control" id='fee' type="number" name="fee" [(ngModel)]='fee' >
-            </div>
-            <div class="col-lg-12 justify-content-center">
+            <form [formGroup]="updateStudBatchFees">
+                <input name='stId' type="hidden" class="form-control col-sm-1 d-none" [(ngModel)]="stId" formControlName="stId" >
+                <input name='batchName' type="hidden" class="form-control col-sm-1 d-none" [(ngModel)]="batchName" formControlName="batchName">
+                <input name='pending' type="hidden" class="form-control col-sm-1 d-none" [(ngModel)]="pending" formControlName="pending" >
+                
                 <div class="form-group">
-                    <button class="btn col-lg-12 btn-success" (click)='addFee()'>Update</button>
-                </div>                        
-            </div>
+                    <label for="Paying">Paying:</label>
+                    <input class="form-control" id='Paying' type="text" name="fee" [(ngModel)]='fee' formControlName="paying" >
+                    <div
+                    class="error"
+                    *ngIf="getupdateStudBatchFees.paying.invalid && getupdateStudBatchFees.paying.touched">
+                    <div *ngIf="getupdateStudBatchFees.paying.errors.required">fees is required</div>
+                    <div *ngIf="getupdateStudBatchFees.paying.errors.pattern">fees should be numbers only</div>
+                </div>
+                </div>
+                <div class="form-group">
+                    <label for="trNum">Transaction Number:</label>
+                    <input class="form-control" id='transactionNumber' type="text" name="transNum" placeholder="please enter transaction number" formControlName="transNum" >
+                    <div
+                    class="error"
+                    *ngIf="getupdateStudBatchFees.transNum.invalid && getupdateStudBatchFees.transNum.touched">
+                    <div *ngIf="getupdateStudBatchFees.transNum.errors.required">fees is required</div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="totalBatches">
+                        Select Paid Date
+                    </label>
+                <div class="input-group">
+                    <input
+                        formControlName="paidDate"
+                        class="form-control col-md-6"
+                        placeholder="yyyy-mm-dd"
+                        name="dp"
+                        [(ngModel)]="model"
+                        ngbDatepicker="ngbDatepicker"
+                        #d="ngbDatepicker" (click)="d.toggle()"
+                        autocomplete="off"
+                        readonly="readonly"
+                        >
+                        <div class="input-group-append">
+                            <button class="fa fa-calendar" (click)="d.toggle()" type="button"></button>
+                        </div>
+                    </div>
+                    <div
+                        class="error"
+                        *ngIf="getupdateStudBatchFees.paidDate.invalid && getupdateStudBatchFees.paidDate.touched">
+                        <div *ngIf="getupdateStudBatchFees.paidDate.errors.required">paying date is required</div>
+                    </div>
+                </div>
+                <div class="col-lg-12 justify-content-center mt-4">
+                    <div class="form-group">
+                            <button
+                                type="submit"
+                                class="btn col-lg-12 btn-success"
+                                [disabled]='updateStudBatchFees.invalid'
+                                (click)="updateStBtchFeesData()">Update</button>
+                        <!-- <button class="btn col-lg-12 btn-success"  (click)='addFee()'>Update</button> -->
+                    </div>                        
+                </div>
+    
+            </form>
+
         </div>
   
         <!-- Modal footer -->

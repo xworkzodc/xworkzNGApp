@@ -2,7 +2,7 @@
 
     <div class="row justify-content-center">
         <div class="justify-content-center">
-            <h2 class="col-sm-12 justify-content-center">{{addBatchTxt}}</h2>
+            <h4 class="col-sm-12 justify-content-center">{{addBatchTxt}}</h4>
         </div>
 
     </div>
@@ -66,6 +66,7 @@
                             class="error"
                             *ngIf="getBatchData.batchTime.invalid && getBatchData.batchTime.touched">
                             <div *ngIf="getBatchData.batchTime.errors.required">Batch time is required</div>
+                            <div *ngIf="getBatchData.batchTime.errors.pattern">Pattern should match</div>
                         </div>
                     </div>
 
@@ -86,6 +87,26 @@
                             <div *ngIf="getBatchData.courseName.errors.required">Course name is required</div>
                         </div>
                     </div>
+
+
+
+                    <div class="form-group">
+                        <label for="batchFees">
+                            Batch Fees:
+                        </label>
+                        <input
+                            formControlName="batchFees"
+                            id="batchFees"
+                            class="form-control"
+                            placeholder="enter batch time">
+                            <div
+                                class="error"
+                                *ngIf="getBatchData.batchFees.invalid && getBatchData.batchFees.touched">
+                                <div *ngIf="getBatchData.batchFees.errors.required">fees is required</div>
+                                <div *ngIf="getBatchData.batchFees.errors.pattern">fees should be numbers only</div>
+                            </div>
+                        </div>
+    
 
                     <div class="form-group">
                         <label for="totalBatches">
@@ -120,7 +141,10 @@
                                     name="dp"
                                     [(ngModel)]="model"
                                     ngbDatepicker="ngbDatepicker"
-                                    #d="ngbDatepicker" (click)="d.toggle()">
+                                    #d="ngbDatepicker" (click)="d.toggle()"
+                                    autocomplete="off"
+                                    readonly="readonly"
+                                    >
                                     <div class="input-group-append">
                                         <button class="fa fa-calendar" (click)="d.toggle()" type="button"></button>
                                     </div>
@@ -129,7 +153,6 @@
                                     class="error"
                                     *ngIf="getBatchData.startDate.invalid && getBatchData.startDate.touched">
                                     <div *ngIf="getBatchData.startDate.errors.required">Start date is required</div>
-                                    <div *ngIf="getBatchData.startDate.errors.pattern">only numbers allowed</div>
                                 </div>
                             </div>
 

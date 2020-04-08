@@ -6,15 +6,23 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class StudentDataService {
-  updateStudentFees(stId: number, fee: number , courseId:number) {
-    var data = {
-        'stId':stId,
-        'fee': fee,
-        'courseId':courseId
-    };
-   return this.httpClient.put(environment.apiUrl+'updateStudFeesById', data , {observe : 'response' , responseType: 'json'});
-   
+  getStuTrasactionByIdNBtchNm(stId: string, batchName: string) {
+    return this.httpClient.get(environment.apiUrl+"getStuTransactionByIdNBatchName/"+stId+"?batchName="+batchName);
   }
+  updateStudentFees(updateFeesData){
+    console.log(updateFeesData);
+    return this.httpClient.put(environment.apiUrl+'updateStudFeesById', updateFeesData , {observe : 'response' , responseType: 'json'});
+  }
+
+  // updateStudentFees(stId: number, fee: number , courseId:number) {
+  //   var data = {
+  //       'stId':stId,
+  //       'fee': fee,
+  //       'courseId':courseId
+  //   };
+  //  return this.httpClient.put(environment.apiUrl+'updateStudFeesById', data , {observe : 'response' , responseType: 'json'});
+   
+  // }
 
   constructor(private httpClient : HttpClient) { }
 

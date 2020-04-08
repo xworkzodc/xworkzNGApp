@@ -1,3 +1,4 @@
+import { StudentBatchFeesComponent } from './student-batch-fees/student-batch-fees.component';
 import { StudAttDataComponent } from './stud-att-data/stud-att-data.component';
 import { CourseDetailsComponent } from './course-details/course-details.component';
 import { ViewBatchComponent } from './view-batch/view-batch.component';
@@ -24,7 +25,8 @@ const routes: Routes = [
   {component:AddBatchComponent , path:'addBatch'},
   {component:ViewBatchComponent, path:'viewBatch'} ,
   {component: CourseDetailsComponent , path:'courseDetails'},
-  {component:StudAttDataComponent, path:'studentsAttByDate'} 
+  {component:StudAttDataComponent, path:'studentsAttByDate'},
+  {component:StudentBatchFeesComponent , path:'studBatchFees'} 
 
 ];
 @NgModule({

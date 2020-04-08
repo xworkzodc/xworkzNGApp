@@ -9,18 +9,23 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./view-batch.component.css']
 })
 export class ViewBatchComponent implements OnInit {
+  stDt: any;
 
   constructor(private batchService: BatchService, private formBuilder: FormBuilder, private courseService: CourseService) { }
   rows: any = [];
   dropdownOptions:any=[];
   dropdownOptions1:any=[];
+  model='';
   batchData = new FormGroup({
     batchId: new FormControl('',[Validators.required]),
     batchName:new FormControl('',[Validators.required]),
     batchType : new FormControl('',[Validators.required]),
-    batchTime : new FormControl('' , [Validators.required]),
+    batchTime : new FormControl('' , [Validators.required, Validators.pattern('((1[0-2]|0?[1-9]):([0-5][0-9]) ([AaPp][Mm]))')]),
     courseName : new FormControl ('', [Validators.required]),
-    batchStatus: new FormControl('',[Validators.required])
+    totalBatches: new FormControl ('',[Validators.required, Validators.pattern('[0-9]*')]),
+    startDate : new FormControl('',[Validators.required]),
+    batchStatus: new FormControl('',[Validators.required]),
+    batchFees: new FormControl(0,[Validators.required,Validators.pattern('[0-9]*')])
   });
   courseText='';
   config = {
@@ -64,6 +69,10 @@ export class ViewBatchComponent implements OnInit {
    
   }
 
+  get getBatchData(){
+    return this.batchData.controls;
+  }
+
   getBatchStatus(){
     this.batchService.getBatchStatus().subscribe(data=>{
       this.dropdownOptions1= data;
@@ -72,6 +81,7 @@ export class ViewBatchComponent implements OnInit {
   getAllBatchData(){
     this.batchService.getAllBatchesData().subscribe(data=>{
       this.rows= data;
+      console.log(data)
     });
   }
 
@@ -91,9 +101,11 @@ export class ViewBatchComponent implements OnInit {
     });
   }
   editBatchData(data){
+   
     this.getBatchStatus();
     // console.log(data);
     this.getAllCourseNames();
+    this.courseText="";
     // console.log(this.batchData);
     this.batchData.controls['batchId'].setValue(data.batchId);
     this.batchData.controls['batchName'].setValue(data.batchName);
@@ -101,10 +113,32 @@ export class ViewBatchComponent implements OnInit {
     this.batchData.controls['batchTime'].setValue(data.batchTime);
     this.batchData.controls['courseName'].setValue(data.courseName);
     this.batchData.controls['batchStatus'].setValue(data.batchStatus);
+    
+    this.batchData.controls['totalBatches'].setValue(data.totalLecture);
+    this.batchData.controls['batchFees'].setValue(data.batchFees);
+    // console.log(data.startDate);
+
+
+    var d = new  Date (data.startDate);
+    // console.log(d);
+    this.stDt = {
+      year: d.getFullYear(), month: d.getMonth()+1, day: d.getDate()
+    };
+
+
+    // this.stDt = data.startDate;
+    // console.log(this.model);
+    // var splitted = data.startDate.split("-", 3);
+    // this.batchData.controls['startDate'].setValue({
+    //   year:splitted[0],
+    //   month:splitted[1],
+    //   day:splitted[2]
+    // });
+    // console.log(splitted); 
     // this.batchData.controls.batchName.value = 'hi';
   }
   updateBatchData(){
-    console.log(this.batchData.value);
+    // console.log(this.batchData.value);
     this.batchService.upadateBatchDataService(this.batchData.value).subscribe(data=>{
       console.log(data);
       if(data.status==200){

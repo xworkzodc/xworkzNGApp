@@ -40,6 +40,7 @@ export class CourseDetailsComponent implements OnInit {
   courseText='';
   noOfHours :number;
   addBatchToTrainer(){
+    
     console.log(this.courseName , this.fee);
     if(this.courseName!=null && this.fee != null){
       if(this.courseName.length>0 && this.fee>0){
@@ -65,6 +66,7 @@ export class CourseDetailsComponent implements OnInit {
   courseId=0;
   editDetails(data){
     console.log(data);
+    this.courseText="";
     this.courseId = data.courseId;
     this.courseName= data.courseName;
     this.fee = data.rate;

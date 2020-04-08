@@ -12,6 +12,10 @@ import { Page } from '../model/page';
   providedIn: 'root'
 })
 export class BatchService {
+  getUpcomingBatches() {
+
+    return this.httpClient.get(environment.apiUrl+'getUpcomingBatches');
+  }
   getBatchStatus() {
     return this.httpClient.get(environment.apiUrl+"getBatchStatusArr");
   }

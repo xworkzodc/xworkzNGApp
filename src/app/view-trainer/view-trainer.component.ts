@@ -63,6 +63,14 @@ export class ViewTrainerComponent implements OnInit {
       this.rows = data;
     });
   }
+  getBtchByTrnrId(id){
+    this.trainerService.getBatchDetailsByTrainerId(id).subscribe(data =>{
+      // console.log(data);
+      this.isTrainterData = false;
+      this.isBatchDt= false;
+      this.rows = data;
+    });
+  }
 
   viewBatchDetailsByBatchId(data){
     // this.trainerService.getBatchDetailsByTrainerId();
@@ -96,7 +104,7 @@ export class ViewTrainerComponent implements OnInit {
         this.trainerService.addBatchToTrainer(this.empId,this.batchName).subscribe(data=>{
           // console.log(data)
             if(data.status==201){
-              this.getBatchesByTrainerId(this.empId);
+              this.getBtchByTrnrId(this.empId);
               document.getElementById('addBatchClose').click();
           }
 

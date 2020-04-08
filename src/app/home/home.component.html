@@ -1,42 +1,17 @@
 
-        <!-- <div class="row ml-3 mr-3 justify-content-center"> 
-            <h2> {{upcomingBatchHeading}} </h2>
-        </div> -->
-        <div class="row ml-3 mr-3 justify-content-center" >
-           
-            <!-- <div class="my-card card col-sm-3">
-                <div class="card-body">
-                    <h4 class="card-title">BatchName</h4>
-                    <p class="card-text">Starting from: 02/04/2020 On 12:00 PM</p>
-                    <a href="#" class="card-link">by DVS MAHAJAN</a>
+        <div class="container">
+            <div class="row ml-3 mr-3 justify-content-center"> 
+                <h2> {{upcomingBatchHeading}} </h2>
+            </div>
+            <div class="row" >
+                <div class="card col-sm-3"  *ngFor="let batchData of upcomingBatches">
+                    <div class="card-body">
+                        <h4 class="card-title">{{batchData.batchName}}</h4>
+                        <p class="card-text">Starting from: {{batchData.startDate}} On {{batchData.batchTime}}</p>
+                        <a href="#" class="card-link">by {{batchData.trainerName}}</a>
+                    </div>
                 </div>
             </div>
-            <div class="my-card card col-sm-3">
-                <div class="card-body">
-                    <h4 class="card-title">BatchName</h4>
-                    <p class="card-text">Starting from: 02/04/2020 On 12:00 PM</p>
-                    <a href="#" class="card-link">by DVS MAHAJAN</a>
-                </div>
-            </div>
-            <div class="my-card card col-sm-3">
-                <div class="card-body">
-                    <h4 class="card-title">BatchName</h4>
-                    <p class="card-text">Starting from: 02/04/2020 On 12:00 PM</p>
-                    <a href="#" class="card-link">by DVS MAHAJAN</a>
-                </div>
-            </div>
-            <div class="my-card card col-sm-3">
-                <div class="card-body">
-                    <h4 class="card-title">BatchName</h4>
-                    <p class="card-text">Starting from: 02/04/2020 On 12:00 PM</p>
-                    <a href="#" class="card-link">by DVS MAHAJAN</a>
-                </div>
-            </div>
-            <div class="my-card card col-sm-3">
-                <div class="card-body">
-                    <h4 class="card-title">BatchName</h4>
-                    <p class="card-text">Starting from: 02/04/2020 On 12:00 PM</p>
-                    <a href="#" class="card-link">by DVS MAHAJAN</a>
-                </div>
-            </div> -->
+               
         </div>
+ 

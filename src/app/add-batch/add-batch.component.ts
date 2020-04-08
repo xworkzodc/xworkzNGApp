@@ -15,11 +15,12 @@ export class AddBatchComponent implements OnInit {
   batchData = new FormGroup({
     batchName:new FormControl('',[Validators.required]),
     batchType : new FormControl('',[Validators.required]),
-    batchTime : new FormControl('' , [Validators.required]),
+    batchTime : new FormControl('' , [Validators.required, Validators.pattern('((1[0-2]|0?[1-9]):([0-5][0-9]) ([AaPp][Mm]))')]),
     courseName : new FormControl ('', [Validators.required]),
     totalBatches: new FormControl ('',[Validators.required, Validators.pattern('[0-9]*')]),
     startDate : new FormControl('',[Validators.required]),
-    batchStatus: new FormControl('',[Validators.required])
+    batchStatus: new FormControl('',[Validators.required]),
+    batchFees: new FormControl(0,[Validators.required,Validators.pattern('[0-9]*')])
   });
   courseText='';
   dropdownOptions1: any=[];

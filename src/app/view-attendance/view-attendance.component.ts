@@ -1,3 +1,4 @@
+import { Page } from './../model/page';
 import { Router } from '@angular/router';
 import { BatchService } from './../service/batch.service';
 import { AttendenceService } from './../service/attendence.service';
@@ -11,10 +12,14 @@ import { throwError } from 'rxjs';
 })
 export class ViewAttendanceComponent implements OnInit {
 
-  constructor(private attendenceService : AttendenceService , private batchService: BatchService , private router : Router) { }
-
+  constructor(private attendenceService : AttendenceService , private batchService: BatchService , private router : Router) { 
+    this.page.pageNumber = 0;
+    this.page.size = 20;
+  }
+  search;
   isAtt=true;
-
+  page = new Page();
+  tempPage=new Page();
   // @Input()
   table:any;
   rows:any =[];
@@ -22,8 +27,58 @@ export class ViewAttendanceComponent implements OnInit {
   batchName='';
   
   ngOnInit() {
-    this.getActiveStudentAttendence();
+    this.setPage({ offset: 0 });
 
+    // this.getActiveStudentAttendence();
+
+  }
+
+  searchData(event){
+    console.log("calling..............................");
+    const val = event.target.value.toLowerCase();
+    // console.log('anoaishd '+searchData.length);
+    console.log(val);
+    if(val.length>3){
+      this.rows=[];
+      this.page=new Page();
+      console.log("getSearchByData........");
+      console.log(val.value);
+      this.getSearchByData(val);
+    }
+    if(val.length<3){
+      this.rows = this.temp;
+      this.page = this.tempPage;
+    }
+  }
+
+  getSearchByData(searchData){
+    this.attendenceService.searchByBtchRmCrsNmRStNm(searchData).subscribe(data=>{
+      // conso le.log(data);
+      this.rows = data;
+      this.page=new Page();
+      let dt:any = data;
+      this.page.totalElements=dt.length;
+      this.page.size=dt.length;
+    });
+  }
+
+  pageData:any;
+  setPage(pageInfo){
+    this.page.pageNumber = pageInfo.offset;
+    this.attendenceService.getActiveStudentAttendenceWithPagination(this.page).subscribe(data=>{
+      // console.log("----------- data ----------   ")
+      // console.log(data);
+      this.rows = data[1];
+      this.page.totalElements= data[0];
+      if(pageInfo.offset==0){
+        this.temp=data[1];
+        this.tempPage = this.page;
+      }
+
+    });
+    this.isAtt = true;
+
+        
   }
 
   getActiveStudentAttendence(){
@@ -44,7 +99,7 @@ export class ViewAttendanceComponent implements OnInit {
   model:any;
   updateFilter(event) {
     const val = event.target.value.toLowerCase();
-// console.log(val);
+  console.log(val);
     // filter our data
     
     const temp = this.temp.filter(function(d) {
