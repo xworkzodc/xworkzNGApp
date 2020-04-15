@@ -23,6 +23,7 @@ import { CourseDetailsComponent } from './course-details/course-details.componen
 import { NgbDate, NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { StudAttDataComponent } from './stud-att-data/stud-att-data.component';
 import { StudentBatchFeesComponent } from './student-batch-fees/student-batch-fees.component';
+import { UploadAttendenceComponent } from './upload-attendence/upload-attendence.component';
 // import { IgxCardModule } from 'igniteui-angular';
 @NgModule({
   declarations: [
@@ -39,7 +40,8 @@ import { StudentBatchFeesComponent } from './student-batch-fees/student-batch-fe
     ViewBatchComponent,
     CourseDetailsComponent,
     StudAttDataComponent,
-    StudentBatchFeesComponent
+    StudentBatchFeesComponent,
+    UploadAttendenceComponent
 
   ],
   imports: [

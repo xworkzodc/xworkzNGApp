@@ -1,0 +1,68 @@
+<div class="container">
+    <div class="row justify-content-center">
+        <h3 class="justify-content-center">Upload Attendence</h3>
+    </div>
+
+    <div class="row justify-content-center">
+        <h5 class="justify-content-center">{{uploadAttTxt}}</h5>
+    </div>
+    <div class="row">
+        <div class="col-lg-2"></div>
+        <form class="col-lg-8 justify-content-center" [formGroup]="attData" (ngSubmit)="updateAtt()"> 
+
+            <div class="form-group  mt-4">
+                <label for="xlsFileUpload">
+                    Select Excel File
+                </label>
+                <input class="form-control col-sm-12" type="file" id="xlsFile" formControlName="xlsFile" (change)="onFileChange($event)" accept=".xls,.xlsx">
+                <div class="error">
+                    <div *ngIf="getAttData.xlsFile.invalid && getAttData.xlsFile.touched">
+                       <div *ngIf="getAttData.xlsFile.errors.required">Please select excel file</div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="form-group">
+                <div class="float-right col-lg-5 justify-content-end pl-0">
+                    <button type="submit" class="col-lg-12 btn btn-success" [disabled]="attData.invalid">Upload</button>
+                </div>
+               
+        </div>
+        <!--         <div class="form-group  mt-4">
+                    <label for="trainerName">
+                        Trainer Name:
+                    </label>
+                    <input id="trainerName" formControlName="trainerName" name="trainerName" type="text" placeholder="enter trainer name" class="form-control col-sm-12">
+                    <div class="error">
+                        <div *ngIf="trnrData.trainerName.invalid && trnrData.trainerName.touched">
+                           <div *ngIf="trnrData.trainerName.errors.required">Trainer name is required</div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="form-group">
+                    <label for="emailId">
+                        Email:
+                    </label>
+                    <input id="emailId" formControlName="emailId" type="email" class="form-control col-sm-12" placeholder="enter email id">
+                    <div class="error">
+                        <div *ngIf="trnrData.emailId.invalid && trnrData.emailId.touched">
+                           <div *ngIf="trnrData.emailId.errors.required">Trainer email id is required</div>
+                           <div *ngIf="trnrData.emailId.errors.email">enter valid email id</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                        <div class="float-left col-lg-5 justify-content-start pl-0">
+                            <button type="submit" class="col-lg-12 btn btn-success" [disabled]="trainerData.invalid">Add</button>
+                        </div>
+                        <div class="float-right col-lg-5 justify-content-end pr-0">
+                            <button type="reset" class="col-lg-12 btn btn-danger" >Reset</button>
+                        </div>
+                </div>-->
+        </form> 
+        <div class="col-lg-2"></div>
+    </div>
+</div>

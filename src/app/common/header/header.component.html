@@ -26,11 +26,25 @@
                   routerLinkActive="router-link-active">view student</a>
               </div>
             </li>
-            
 
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" id="at" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Attendence</a>
+              <div class="dropdown-menu" aria-labelledby="at">
+                  <a
+                  class="dropdown-item"
+                  routerLink="/viewAttendance"
+                  routerLinkActive="router-link-active">View Attendence</a>
+                  <a
+                  class="dropdown-item"
+                  routerLink="/uploadAttendence"
+                  routerLinkActive="router-link-active">Upload Attendence</a>
+              </div>
+            </li>
+            
+<!-- 
             <li class="nav-item">
                 <a class="nav-link" routerLink="/viewAttendance" routerLinkActive="router-link-active">View Attendence</a>
-            </li>
+            </li> -->
             <li class="nav-item">
               <a class="nav-link" routerLink="/courseDetails" routerLinkActive="router-link-active">Courses</a>
           </li>
